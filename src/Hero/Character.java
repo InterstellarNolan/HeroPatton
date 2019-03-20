@@ -1,6 +1,6 @@
 package Hero;
 
-import Item.Equipment;
+import Item.Armor;
 import Item.Weapon;
 
 /*
@@ -41,13 +41,33 @@ public class Character {
     private double evadeRate = 0.05;
 
     //武器
-    private Equipment weapon = null;
+    private Weapon weapon = null;
 
     //盔甲
-    private Equipment armor = null;
+    private Armor armor = null;
 
-    public Character(String name, Role role) {
+    private static Character uniqueCharacter;
+
+    public static Character getInstance(String name, String roleName) {
+        if (uniqueCharacter == null) {
+            uniqueCharacter = new Character(name, roleName);
+        }
+        return uniqueCharacter;
+    }
+
+    private Character(String name, String roleName) {
         this.name = name;
+        Role role;
+        switch (roleName) {
+            case "warrior":
+                role = new RoleWarrior(this);
+                break;
+            case "hunter":
+                role = new RoleHunter(this);
+                break;
+            default:
+                role = new RoleWarrior(this);
+        }
         this.role = role;
     }
 
@@ -139,19 +159,20 @@ public class Character {
         this.evadeRate = evadeRate;
     }
 
-    public Equipment getWeapon() {
+    public Weapon getWeapon() {
         return weapon;
     }
 
-    public void setWeapon(Equipment weapon) {
+    public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
     }
 
-    public Equipment getArmor() {
+    public Armor getArmor() {
         return armor;
     }
 
-    public void setArmor(Equipment armor) {
+    public void setArmor(Armor armor) {
         this.armor = armor;
     }
 }
+

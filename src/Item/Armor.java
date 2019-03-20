@@ -1,4 +1,4 @@
 package Item;
 
-public abstract class Armor implements Equipment{
+public abstract class Armor{
 }

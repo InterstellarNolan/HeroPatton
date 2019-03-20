@@ -1,5 +1,7 @@
 package Hero;
 
+import Monster.Monster;
+
 public class RoleHunter implements Role {
 
     private Character character;
@@ -15,6 +17,9 @@ public class RoleHunter implements Role {
 
     @Override
     public int levelUp() {
+        /**
+         * Hunter等级提升一级（不超过100级）
+         */
         int currentLevel = character.getLevel();
         if (currentLevel < 100) {
             character.setLevel(currentLevel + 1);
@@ -30,6 +35,11 @@ public class RoleHunter implements Role {
         character.setMaxMagicPoint(magicPoint);
         character.setMagicPoint(magicPoint);
 
-        return currentLevel += 1;
+        return currentLevel + 1;
+    }
+
+    @Override
+    public double normalAttack(Monster monster) {
+        return 0;
     }
 }

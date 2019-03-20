@@ -1,5 +1,8 @@
 package Hero;
 
+import Item.Weapon;
+import Monster.Monster;
+
 public class RoleWarrior implements Role {
 
     private Character character;
@@ -15,6 +18,9 @@ public class RoleWarrior implements Role {
 
     @Override
     public int levelUp() {
+        /**
+         * Warrior等级提升一级（不超过100级）
+         */
         int currentLevel = character.getLevel();
         if (currentLevel < 100) {
             character.setLevel(currentLevel + 1);
@@ -30,6 +36,21 @@ public class RoleWarrior implements Role {
         character.setMaxMagicPoint(magicPoint);
         character.setMagicPoint(magicPoint);
 
-        return currentLevel += 1;
+        /**
+         * 武器升级
+         */
+        if (character.getWeapon()!=null){
+            Weapon weapon=character.getWeapon();
+            weapon.se
+        }
+
+        return currentLevel + 1;
+
+
+    }
+
+    @Override
+    public double normalAttack(Monster monster) {
+        return 0;
     }
 }
