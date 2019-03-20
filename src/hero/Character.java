@@ -1,7 +1,7 @@
-package Hero;
+package hero;
 
-import Item.Armor;
-import Item.Weapon;
+import item.Armor;
+import item.Weapon;
 
 /*
 角色

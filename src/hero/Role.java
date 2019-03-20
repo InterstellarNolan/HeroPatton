@@ -1,6 +1,6 @@
-package Hero;
+package hero;
 
-import Monster.Monster;
+import monster.Monster;
 
 public interface Role {
 
