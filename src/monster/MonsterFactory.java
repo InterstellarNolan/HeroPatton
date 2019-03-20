@@ -14,8 +14,9 @@ public class MonsterFactory {
         }
     }
 
-    public Monster createMonster(String type,int level){
-        if(type.equals("tank")){
+    public Monster createMonster(int level){
+        int flag=(int) (Math.random()*10);
+        if(flag>6){
             return new TankMonster(level);
         }else{
             return new NormalMonster(level);
