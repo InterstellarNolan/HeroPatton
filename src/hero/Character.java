@@ -14,16 +14,16 @@ public class Character {
     private int coin = 0;
 
     //健康值
-    private double healthPoint = 100;
+    private int healthPoint = 100;
 
     //最大健康量
-    private double maxHealthPoint = 100;
+    private int maxHealthPoint = 100;
 
     //法力值
-    private double magicPoint = 100;
+    private int magicPoint = 100;
 
     //最大法力值
-    private double maxMagicPoint = 100;
+    private int maxMagicPoint = 100;
 
     //职业
     private Role role;
@@ -87,35 +87,35 @@ public class Character {
         this.coin = coin;
     }
 
-    public double getHealthPoint() {
+    public int getHealthPoint() {
         return healthPoint;
     }
 
-    public void setHealthPoint(double healthPoint) {
+    public void setHealthPoint(int healthPoint) {
         this.healthPoint = healthPoint;
     }
 
-    public double getMaxHealthPoint() {
+    public int getMaxHealthPoint() {
         return maxHealthPoint;
     }
 
-    public void setMaxHealthPoint(double maxHealthPoint) {
+    public void setMaxHealthPoint(int maxHealthPoint) {
         this.maxHealthPoint = maxHealthPoint;
     }
 
-    public double getMagicPoint() {
+    public int getMagicPoint() {
         return magicPoint;
     }
 
-    public void setMagicPoint(double magicPoint) {
+    public void setMagicPoint(int magicPoint) {
         this.magicPoint = magicPoint;
     }
 
-    public double getMaxMagicPoint() {
+    public int getMaxMagicPoint() {
         return maxMagicPoint;
     }
 
-    public void setMaxMagicPoint(double maxMagicPoint) {
+    public void setMaxMagicPoint(int maxMagicPoint) {
         this.maxMagicPoint = maxMagicPoint;
     }
 

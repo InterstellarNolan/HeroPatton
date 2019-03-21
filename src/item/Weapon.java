@@ -3,25 +3,28 @@ package item;
 public abstract class Weapon {
 
     //武器名称
-    public String name = "武器";
+    private String name = "武器";
 
     //武器类型，适合Warrior或Hunter
-    public String weaponType;
+    private String weaponType;
 
     //武器介绍
-    public String description;
+    private String description;
 
     //武器等级
-    public int level;
+    private int level;
 
     //武器伤害
-    public double damage;
+    private int damage;
 
     //伤害类型
-    public String damageType;
+    private String damageType;
 
     //价值
-    public int value;
+    private int value;
+
+    //剩余加强次数
+    private int leftStrength = 5;
 
     public int levelUp(){
         return level;
@@ -62,11 +65,11 @@ public abstract class Weapon {
         this.level = level;
     }
 
-    public double getDamage() {
+    public int getDamage() {
         return damage;
     }
 
-    public void setDamage(double damage) {
+    public void setDamage(int damage) {
         this.damage = damage;
     }
 

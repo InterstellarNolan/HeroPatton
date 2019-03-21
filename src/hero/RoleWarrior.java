@@ -11,6 +11,13 @@ public class RoleWarrior implements Role {
         this.character = character;
     }
 
+
+    @Override
+    public Character getCharacter() {
+        return character;
+    }
+
+
     @Override
     public String getRole() {
         return "Warrior";
@@ -28,11 +35,11 @@ public class RoleWarrior implements Role {
             return currentLevel;
         }
 
-        double healthPoint = character.getMaxMagicPoint() + 50 * currentLevel;
+        int healthPoint = character.getMaxMagicPoint() + 50 * currentLevel;
         character.setMaxHealthPoint(healthPoint);
         character.setHealthPoint(healthPoint);
 
-        double magicPoint = character.getMaxMagicPoint() + 20 * currentLevel;
+        int magicPoint = character.getMaxMagicPoint() + 20 * currentLevel;
         character.setMaxMagicPoint(magicPoint);
         character.setMagicPoint(magicPoint);
 
