@@ -39,9 +39,9 @@ public class RoleWarrior implements Role {
         /**
          * 武器升级
          */
-        if (character.getWeapon()!=null){
-            Weapon weapon=character.getWeapon();
-            weapon.se
+        if (character.getWeapon() != null) {
+            Weapon weapon = character.getWeapon();
+
         }
 
         return currentLevel + 1;
