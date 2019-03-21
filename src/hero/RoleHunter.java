@@ -45,7 +45,7 @@ public class RoleHunter implements Role {
     }
 
     @Override
-    public double normalAttack(Monster monster) {
+    public int normalAttack() {
         return 0;
     }
 }

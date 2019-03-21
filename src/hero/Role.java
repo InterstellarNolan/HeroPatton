@@ -11,5 +11,5 @@ public interface Role {
 
     int levelUp();
 
-    double normalAttack(Monster monster);
+    int normalAttack();
 }
