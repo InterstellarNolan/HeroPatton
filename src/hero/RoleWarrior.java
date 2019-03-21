@@ -60,4 +60,17 @@ public class RoleWarrior implements Role {
     public int normalAttack() {
         return 0;
     }
+
+    @Override
+    public boolean beAttacked(int damage) {
+        int hp=this.character.getHealthPoint()-damage;
+        this.character.setHealthPoint(hp);
+        if(hp<=0){
+            this.character.setHealthPoint(0);
+            return true;
+        }else{
+            return false;
+        }
+
+    }
 }

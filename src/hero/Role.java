@@ -11,4 +11,7 @@ public interface Role {
     int levelUp();
 
     int normalAttack();
+
+    //被打败返回true
+    boolean beAttacked(int damage);
 }

@@ -20,14 +20,30 @@ public class Battle {
     }
 
     public void attack(){
-        
-
+        boolean killed=monster.beAttacked(role.normalAttack());
+        if(killed){
+            this.end=true;
+            this.win=true;
+            this.getReward();
+            return;
+        }
+        killed=role.beAttacked(monster.attack());
+        if(killed){
+            this.end=true;
+            this.win=false;
+            return;
+        }
     }
 
     public void skill(int i){
 
     }
 
+    private void getReward(){
+        int coin=this.role.getCharacter().getCoin()+this.monster.getCoin();
+        this.role.getCharacter().setCoin(coin);
+        this.role.levelUp();
+    }
 
 
     public Monster getMonster() {
