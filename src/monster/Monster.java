@@ -12,9 +12,9 @@ public abstract class Monster {
     //打败获得金钱
     private int coin;
     //健康值
-    private double healthPoint;
+    private int healthPoint;
     //最大健康量
-    private double maxHealthPoint;
+    private int maxHealthPoint;
     //等级
     private int level;
     //攻击力
@@ -82,19 +82,19 @@ public abstract class Monster {
         this.coin = coin;
     }
 
-    public double getHealthPoint() {
+    public int getHealthPoint() {
         return healthPoint;
     }
 
-    public void setHealthPoint(double healthPoint) {
+    public void setHealthPoint(int healthPoint) {
         this.healthPoint = healthPoint;
     }
 
-    public double getMaxHealthPoint() {
+    public int getMaxHealthPoint() {
         return maxHealthPoint;
     }
 
-    public void setMaxHealthPoint(double maxHealthPoint) {
+    public void setMaxHealthPoint(int maxHealthPoint) {
         this.maxHealthPoint = maxHealthPoint;
     }
 

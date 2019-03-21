@@ -5,7 +5,7 @@ public class MonsterFactory {
 
     private MonsterFactory(){}
 
-    public MonsterFactory getInstance(){
+    public static MonsterFactory getInstance(){
         if(instance==null){
             instance=new MonsterFactory();
             return instance;
