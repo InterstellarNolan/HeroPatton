@@ -1,6 +1,7 @@
 package hero;
 
 import monster.Monster;
+import util.ResultMessage;
 
 public interface Role {
 
@@ -10,7 +11,7 @@ public interface Role {
 
     int levelUp();
 
-    int normalAttack();
+    ResultMessage normalAttack();
 
     //被打败返回true
     boolean beAttacked(int damage);

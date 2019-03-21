@@ -34,8 +34,7 @@ public class Character {
     //经验
     private int experience = 0;
 
-    //命中率
-    private double hitRate = 0.85;
+
 
     //闪避率
     private double evadeRate = 0.05;
@@ -143,13 +142,8 @@ public class Character {
         this.experience = experience;
     }
 
-    public double getHitRate() {
-        return hitRate;
-    }
-
-    public void setHitRate(double hitRate) {
-        this.hitRate = hitRate;
-    }
+    //命中率
+    private double hitRate = 0.85;
 
     public double getEvadeRate() {
         return evadeRate;

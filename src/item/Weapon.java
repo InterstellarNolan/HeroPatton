@@ -1,5 +1,7 @@
 package item;
 
+import util.ResultMessage;
+
 public abstract class Weapon {
 
     //武器名称
@@ -26,11 +28,14 @@ public abstract class Weapon {
     //剩余加强次数
     private int leftStrength = 5;
 
-    public int levelUp(){
-        return level;
+    //命中率
+    private double hitRate = 0.9;
+
+    public ResultMessage levelUp() {
+        return new ResultMessage(false, "升级失败", level);
     }
 
-    public abstract double Strengthen(int coin);
+    public abstract ResultMessage Strengthen();
 
 
     public String getName() {
@@ -89,4 +94,19 @@ public abstract class Weapon {
         this.value = value;
     }
 
+    public int getLeftStrength() {
+        return leftStrength;
+    }
+
+    public void setLeftStrength(int leftStrength) {
+        this.leftStrength = leftStrength;
+    }
+
+    public double getHitRate() {
+        return hitRate;
+    }
+
+    public void setHitRate(double hitRate) {
+        this.hitRate = hitRate;
+    }
 }
