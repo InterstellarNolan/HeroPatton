@@ -32,7 +32,7 @@ public abstract class Weapon {
     private double hitRate = 0.9;
 
     public ResultMessage levelUp() {
-        return new ResultMessage(false, "升级失败", level);
+        return new ResultMessage(false, "升级失败，不是具体武器", level);
     }
 
     public abstract ResultMessage Strengthen();

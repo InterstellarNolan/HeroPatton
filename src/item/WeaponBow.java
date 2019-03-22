@@ -28,7 +28,7 @@ public class WeaponBow extends Weapon {
             resultMessage = new ResultMessage(true, "武器已升级到" + String.valueOf(level) + "级", level);
             return resultMessage;
         } else {
-            resultMessage = new ResultMessage(false, "武器升级失败", level);
+            resultMessage = new ResultMessage(false, "武器升级失败，已达到100级", level);
             return resultMessage;
         }
     }

@@ -9,8 +9,9 @@ public interface Role {
 
     public String getRole();
 
-    int levelUp();
+    ResultMessage levelUp();
 
+    //普通攻击，返回是否命中，伤害数值
     ResultMessage normalAttack();
 
     //被打败返回true

@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class RoleHunter implements Role {
 
-    private Character character;
+    private  Character character;
 
     public RoleHunter(Character character) {
         this.character = character;
@@ -16,7 +16,7 @@ public class RoleHunter implements Role {
 
     @Override
     public Character getCharacter() {
-        return character;
+        return this.character;
     }
 
     @Override
@@ -25,42 +25,46 @@ public class RoleHunter implements Role {
     }
 
     @Override
-    public int levelUp() {
+    public ResultMessage levelUp() {
         /**
          * Hunter等级提升一级（不超过100级）
          */
-        int currentLevel = character.getLevel();
+        int currentLevel = this.character.getLevel();
         if (currentLevel < 100) {
-            character.setLevel(currentLevel + 1);
+            this.character.setLevel(currentLevel + 1);
         } else {
-            return currentLevel;
+            return new ResultMessage(false,"角色升级失败，已达到100级",currentLevel);
         }
 
-        int healthPoint = character.getMaxMagicPoint() + 30 * currentLevel;
-        character.setMaxHealthPoint(healthPoint);
-        character.setHealthPoint(healthPoint);
+        int healthPoint = this.character.getMaxMagicPoint() + 30 * currentLevel;
+        this.character.setMaxHealthPoint(healthPoint);
+        this.character.setHealthPoint(healthPoint);
 
-        int magicPoint = character.getMaxMagicPoint() + 50 * currentLevel;
-        character.setMaxMagicPoint(magicPoint);
-        character.setMagicPoint(magicPoint);
+        int magicPoint = this.character.getMaxMagicPoint() + 50 * currentLevel;
+        this.character.setMaxMagicPoint(magicPoint);
+        this.character.setMagicPoint(magicPoint);
 
 
         /**
          * 武器升级
          */
-        if (character.getWeapon() != null) {
-            Weapon weapon = character.getWeapon();
+        if (this.character.getWeapon() != null) {
+            Weapon weapon = this.character.getWeapon();
             ResultMessage resultMessage = weapon.levelUp();
+            if (!resultMessage.isSuccess()){
+                return new ResultMessage(true,"猎人角色升级成功，武器升级失败",currentLevel+1);
+            }
         }
 
-        return currentLevel + 1;
+
+        return new ResultMessage(true,"猎人角色升级成功",currentLevel+1);
     }
 
     @Override
     public ResultMessage normalAttack() {
         //有武器的话
-        if (character.getWeapon() != null) {
-            Weapon weapon = character.getWeapon();
+        if (this.character.getWeapon() != null) {
+            Weapon weapon = this.character.getWeapon();
             int damage = 0;
             boolean hit = false;
             //如果是远程武器造成1.2倍伤害，如果是近战造成1倍伤害
@@ -81,7 +85,7 @@ public class RoleHunter implements Role {
             //没有武器 造成80%命中的石块伤害
         } else {
             //5乘角色等级，加2-6点伤害
-            int damage = character.getLevel() * 5 + new Random().nextInt(5) + 2;
+            int damage = this.character.getLevel() * 5 + new Random().nextInt(5) + 2;
             boolean hit = false;
             if (new Random().nextDouble() > 0.2) {
                 hit = true;
@@ -94,7 +98,10 @@ public class RoleHunter implements Role {
 
     @Override
     public boolean beAttacked(int damage) {
-        int hp = this.character.getHealthPoint() - damage;
+        int hp = this.character.getHealthPoint();
+        if (this.character.getEvadeRate() > new Random().nextDouble()) {
+            hp = this.character.getHealthPoint() - damage;
+        }
         this.character.setHealthPoint(hp);
         if (hp <= 0) {
             this.character.setHealthPoint(0);

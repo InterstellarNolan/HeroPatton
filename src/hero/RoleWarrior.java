@@ -16,7 +16,7 @@ public class RoleWarrior implements Role {
 
     @Override
     public Character getCharacter() {
-        return character;
+        return this.character;
     }
 
 
@@ -26,34 +26,38 @@ public class RoleWarrior implements Role {
     }
 
     @Override
-    public int levelUp() {
+    public ResultMessage levelUp() {
         /**
          * Warrior等级提升一级（不超过100级）
          */
-        int currentLevel = character.getLevel();
+        int currentLevel = this.character.getLevel();
         if (currentLevel < 100) {
-            character.setLevel(currentLevel + 1);
+            this.character.setLevel(currentLevel + 1);
         } else {
-            return currentLevel;
+            return new ResultMessage(false,"角色升级失败，已达到100级",currentLevel);
         }
 
-        int healthPoint = character.getMaxMagicPoint() + 50 * currentLevel;
-        character.setMaxHealthPoint(healthPoint);
-        character.setHealthPoint(healthPoint);
+        int healthPoint = this.character.getMaxMagicPoint() + 50 * currentLevel;
+        this.character.setMaxHealthPoint(healthPoint);
+        this.character.setHealthPoint(healthPoint);
 
-        int magicPoint = character.getMaxMagicPoint() + 20 * currentLevel;
-        character.setMaxMagicPoint(magicPoint);
-        character.setMagicPoint(magicPoint);
+        int magicPoint = this.character.getMaxMagicPoint() + 20 * currentLevel;
+        this.character.setMaxMagicPoint(magicPoint);
+        this.character.setMagicPoint(magicPoint);
 
         /**
          * 武器升级
          */
-        if (character.getWeapon() != null) {
-            Weapon weapon = character.getWeapon();
+        if (this.character.getWeapon() != null) {
+            Weapon weapon = this.character.getWeapon();
             ResultMessage resultMessage = weapon.levelUp();
+            if (!resultMessage.isSuccess()){
+                return new ResultMessage(true,"战士角色升级成功，武器升级失败",currentLevel+1);
+            }
         }
 
-        return currentLevel + 1;
+
+        return new ResultMessage(true,"战士角色升级成功",currentLevel+1);
 
 
     }
