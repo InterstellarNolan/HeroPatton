@@ -16,4 +16,6 @@ public interface Role {
 
     //被打败返回true
     boolean beAttacked(int damage);
+
+    ResultMessage heal(int value);
 }
