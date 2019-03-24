@@ -8,23 +8,23 @@ public class WeaponSword extends Weapon {
 
 
     public WeaponSword(String name1, String description1, int damage1) {
-        setName(name1.concat("-近战"));
-        setWeaponType("warrior");
-        setDescription(description1);
-        setLevel(1);
-        setDamage(damage1);
-        setDamageType("近战伤害");
-        setValue(10);
+        this.setName(name1.concat("-近战"));
+        this.setWeaponType("warrior");
+        this.setDescription(description1);
+        this.setLevel(1);
+        this.setDamage(damage1);
+        this.setDamageType("近战伤害");
+        this.setValue(10);
     }
 
     @Override
     public ResultMessage levelUp() {
         ResultMessage resultMessage;
-        int level = getLevel();
+        int level = this.getLevel();
         if (level < 100) {
-            setDamage(getDamage() + level * 5);
-            setLevel(level++);
-            setValue(10 * level + new Random().nextInt(10));
+            this.setDamage(this.getDamage() + level * 5);
+            this.setLevel(level++);
+            this.setValue(10 * level + new Random().nextInt(10));
             resultMessage = new ResultMessage(true, "武器已升级到" + String.valueOf(level) + "级", level);
             return resultMessage;
         } else {
@@ -41,12 +41,12 @@ public class WeaponSword extends Weapon {
     @Override
     public ResultMessage Strengthen() {
 
-        if (getLeftStrength() > 0) {
-            setDamage(getDamage() + new Random().nextInt(3) + 1);
-            setLeftStrength(getLeftStrength() - 1);
-            return new ResultMessage(true, getName().concat("已强化，当前伤害" + String.valueOf(getDamage())), getDamage());
+        if (this.getLeftStrength() > 0) {
+            this.setDamage(this.getDamage() + new Random().nextInt(3) + 1);
+            this.setLeftStrength(this.getLeftStrength() - 1);
+            return new ResultMessage(true, getName().concat("已强化，当前伤害" + String.valueOf(this.getDamage())), this.getDamage());
         } else {
-            return new ResultMessage(false,"强化失败，剩余强化次数不够",getDamage());
+            return new ResultMessage(false,"强化失败，剩余强化次数不够",this.getDamage());
         }
     }
 }
