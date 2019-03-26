@@ -27,16 +27,11 @@ public class Battle {
     public ResultMessage attack(){
         boolean killed=monster.beAttacked((int) role.normalAttack().getT());
         if(killed){
-            this.end=true;
-            this.win=true;
             this.getReward();
-            return new ResultMessage(true, "战斗胜利", 0);
         }
         killed=role.beAttacked(monster.attack());
         if(killed){
-            this.end=true;
-            this.win=false;
-            return new ResultMessage(false, "战斗失败", 0);
+            this.beKilled();
         }
         return new ResultMessage(true, "下一回合", 0);
     }
@@ -51,16 +46,14 @@ public class Battle {
         }else{
             this.role.getCharacter().setMagicPoint(this.role.getCharacter().getMaxMagicPoint()-cost);
         }
-
         for(Skill skill:skills){
             SkillResult result=skill.execute(role.getCharacter().getWeapon().getDamage());
             if(result.getDamage()>0){
                 boolean killed=this.monster.beAttacked(result.getDamage());
                 if(killed){
-                    this.end=true;
-                    this.win=true;
+
                     this.getReward();
-                    return new ResultMessage(true, "战斗胜利", 0);
+
                 }
             }
             if(result.getHeal()>0){
@@ -70,23 +63,30 @@ public class Battle {
 
         boolean beKilled=role.beAttacked(monster.attack());
         if(beKilled){
-            this.end=true;
-            this.win=false;
-            return new ResultMessage(false, "战斗失败", 0);
+           this.beKilled();
         }
 
         return new ResultMessage(true, "下一回合", 0);
     }
 
-    private void getReward(){
+    private ResultMessage getReward(){
+        this.end=true;
+        this.win=true;
         int coin=this.role.getCharacter().getCoin()+this.monster.getCoin();
         this.role.getCharacter().setCoin(coin);
         this.role.levelUp();
         this.role.getCharacter().setHealthPoint(this.role.getCharacter().getMaxHealthPoint());
         this.role.getCharacter().setMagicPoint(this.role.getCharacter().getMaxMagicPoint());
+        return new ResultMessage(true, "战斗胜利", 0);
     }
 
 
+
+    private ResultMessage beKilled(){
+        this.end=true;
+        this.win=false;
+        return new ResultMessage(false, "战斗失败", 0);
+    }
 
     public Monster getMonster() {
         return monster;
