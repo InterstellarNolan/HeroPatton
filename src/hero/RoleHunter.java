@@ -111,7 +111,7 @@ public class RoleHunter implements Role {
         }
     }
 
-    @Override
+    //@Override
     public ResultMessage heal(int value){
         int hp = this.character.getHealthPoint()+value;
         if(hp>this.character.getMaxHealthPoint()){

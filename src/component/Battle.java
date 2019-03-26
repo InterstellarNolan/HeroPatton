@@ -1,6 +1,6 @@
 package component;
 
-import hero.Role;
+import hero.Character;
 import hero.skill.Skill;
 import monster.Monster;
 import monster.MonsterFactory;
@@ -11,25 +11,25 @@ import java.util.ArrayList;
 
 public class Battle {
     private Monster monster;
-    private Role role;
+    private Character character;
     private boolean end=false;
     private boolean win=false;
 
     public Battle(){}
 
-    public Battle(Role role){
-        this.role=role;
-        this.monster=MonsterFactory.getInstance().createMonster(role.getCharacter().getLevel());
+    public Battle(Character character){
+        this.character=character;
+        this.monster=MonsterFactory.getInstance().createMonster(character.getLevel());
         this.end=false;
         this.win=false;
     }
 
     public ResultMessage attack(){
-        boolean killed=monster.beAttacked((int) role.normalAttack().getT());
+        boolean killed=monster.beAttacked((int) character.normalAttack().getT());
         if(killed){
             this.getReward();
         }
-        killed=role.beAttacked(monster.attack());
+        killed=character.beAttacked(monster.attack());
         if(killed){
             this.beKilled();
         }
@@ -41,13 +41,13 @@ public class Battle {
         for(Skill skill:skills){
             cost+=skill.getCost();
         }
-        if(cost>this.role.getCharacter().getMagicPoint()){
+        if(cost>this.character.getMagicPoint()){
             return  new ResultMessage(false, "MP不够", cost);
         }else{
-            this.role.getCharacter().setMagicPoint(this.role.getCharacter().getMaxMagicPoint()-cost);
+            this.character.setMagicPoint(this.character.getMaxMagicPoint()-cost);
         }
         for(Skill skill:skills){
-            SkillResult result=skill.execute(role.getCharacter().getWeapon().getDamage());
+            SkillResult result=skill.execute(character.getWeapon().getDamage());
             if(result.getDamage()>0){
                 boolean killed=this.monster.beAttacked(result.getDamage());
                 if(killed){
@@ -57,11 +57,11 @@ public class Battle {
                 }
             }
             if(result.getHeal()>0){
-                this.role.heal(result.getHeal());
+                this.character.heal(result.getHeal());
             }
         }
 
-        boolean beKilled=role.beAttacked(monster.attack());
+        boolean beKilled=character.beAttacked(monster.attack());
         if(beKilled){
            this.beKilled();
         }
@@ -72,11 +72,11 @@ public class Battle {
     private ResultMessage getReward(){
         this.end=true;
         this.win=true;
-        int coin=this.role.getCharacter().getCoin()+this.monster.getCoin();
-        this.role.getCharacter().setCoin(coin);
-        this.role.levelUp();
-        this.role.getCharacter().setHealthPoint(this.role.getCharacter().getMaxHealthPoint());
-        this.role.getCharacter().setMagicPoint(this.role.getCharacter().getMaxMagicPoint());
+        int coin=this.character.getCoin()+this.monster.getCoin();
+        this.character.setCoin(coin);
+        this.character.levelUp();
+        this.character.setHealthPoint(this.character.getMaxHealthPoint());
+        this.character.setMagicPoint(this.character.getMaxMagicPoint());
         return new ResultMessage(true, "战斗胜利", 0);
     }
 
@@ -96,12 +96,12 @@ public class Battle {
         this.monster = monster;
     }
 
-    public Role getRole() {
-        return role;
+    public Character getCharacter() {
+        return character;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setCharacter(Character character) {
+        this.character = character;
     }
 
     public boolean isEnd() {

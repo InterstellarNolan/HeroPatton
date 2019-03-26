@@ -2,6 +2,7 @@ package hero;
 
 import item.Armor;
 import item.Weapon;
+import util.ResultMessage;
 
 /*
 角色
@@ -45,16 +46,17 @@ public class Character {
     //盔甲
     private Armor armor = null;
 
-    private static Character uniqueCharacter;
+    //private static Character uniqueCharacter;
 
+    /*
     public static Character getInstance(String name, String roleName) {
         if (uniqueCharacter == null) {
             uniqueCharacter = new Character(name, roleName);
         }
         return uniqueCharacter;
     }
-
-    private Character(String name, String roleName) {
+    */
+    public Character(String name, String roleName) {
         this.name = name;
         Role role;
         switch (roleName) {
@@ -69,6 +71,33 @@ public class Character {
         }
         this.role = role;
     }
+
+    public ResultMessage levelUp(){
+        return role.levelUp();
+    }
+
+    //普通攻击，返回是否命中，伤害数值
+    public ResultMessage normalAttack(){
+        return role.normalAttack();
+    }
+
+    //被打败返回true
+    public boolean beAttacked(int damage){
+        return role.beAttacked(damage);
+    }
+
+    public ResultMessage heal(int value){
+        int hp = this.getHealthPoint()+value;
+        if(hp>this.getMaxHealthPoint()){
+            hp=this.getMaxHealthPoint();
+        }
+        this.setHealthPoint(hp);
+        return new ResultMessage(true, "回复".concat(String.valueOf(value) + "点血量"), value);
+    }
+
+
+
+
 
     public String getName() {
         return name;
