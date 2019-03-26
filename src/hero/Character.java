@@ -89,6 +89,7 @@ public class Character {
     public ResultMessage heal(int value){
         int hp = this.getHealthPoint()+value;
         if(hp>this.getMaxHealthPoint()){
+            value = hp - this.getMaxHealthPoint();
             hp=this.getMaxHealthPoint();
         }
         this.setHealthPoint(hp);
@@ -186,6 +187,10 @@ public class Character {
         return weapon;
     }
 
+    /**
+     * 装备武器
+     * @param weapon
+     */
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
     }
@@ -194,6 +199,10 @@ public class Character {
         return armor;
     }
 
+    /**
+     * 装备盔甲
+     * @param armor
+     */
     public void setArmor(Armor armor) {
         this.armor = armor;
     }

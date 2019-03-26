@@ -25,6 +25,11 @@ public class RoleWarrior implements Role {
         return "Warrior";
     }
 
+    /**
+     * 升级
+     *
+     * @return
+     */
     @Override
     public ResultMessage levelUp() {
         /**
@@ -34,7 +39,7 @@ public class RoleWarrior implements Role {
         if (currentLevel < 100) {
             this.character.setLevel(currentLevel + 1);
         } else {
-            return new ResultMessage(false,"角色升级失败，已达到100级",currentLevel);
+            return new ResultMessage(false, "角色升级失败，已达到100级", currentLevel);
         }
 
         int healthPoint = this.character.getMaxMagicPoint() + 50 * currentLevel;
@@ -51,17 +56,22 @@ public class RoleWarrior implements Role {
         if (this.character.getWeapon() != null) {
             Weapon weapon = this.character.getWeapon();
             ResultMessage resultMessage = weapon.levelUp();
-            if (!resultMessage.isSuccess()){
-                return new ResultMessage(true,"战士角色升级成功，武器升级失败",currentLevel+1);
+            if (!resultMessage.isSuccess()) {
+                return new ResultMessage(true, "战士角色升级成功，武器升级失败", currentLevel + 1);
             }
         }
 
 
-        return new ResultMessage(true,"战士角色升级成功",currentLevel+1);
+        return new ResultMessage(true, "战士角色升级成功", currentLevel + 1);
 
 
     }
 
+    /**
+     * 普通攻击
+     *
+     * @return
+     */
     @Override
     public ResultMessage normalAttack() {
         //有武器的话
@@ -92,6 +102,12 @@ public class RoleWarrior implements Role {
         }
     }
 
+    /**
+     * 被敌人攻击
+     *
+     * @param damage 伤害数值
+     * @return true死了false活着
+     */
     @Override
     public boolean beAttacked(int damage) {
         int hp = this.character.getHealthPoint() - damage;
@@ -104,14 +120,21 @@ public class RoleWarrior implements Role {
         }
 
     }
+
+    /**
+     * 回血
+     *
+     * @param value
+     * @return
+     */
     // @Override
-    public ResultMessage heal(int value){
-        int hp = this.character.getHealthPoint()+value;
-        if(hp>this.character.getMaxHealthPoint()){
-            hp=this.character.getMaxHealthPoint();
+    public ResultMessage heal(int value) {
+        int hp = this.character.getHealthPoint() + value;
+        if (hp > this.character.getMaxHealthPoint()) {
+            value = hp - this.character.getMaxHealthPoint();
+            hp = this.character.getMaxHealthPoint();
         }
         this.character.setHealthPoint(hp);
         return new ResultMessage(true, "回复".concat(String.valueOf(value) + "点血量"), value);
     }
-
 }

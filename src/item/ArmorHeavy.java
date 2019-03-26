@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class ArmorHeavy extends Armor {
     /**
-     * 重甲强化
+     * 重甲强化，加2-7血
      * @return
      */
     @Override

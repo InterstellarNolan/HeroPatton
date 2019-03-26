@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class ArmorLight extends Armor {
     /**
-     * 轻甲强化
+     * 轻甲强化，加1-3血
      * @return
      */
     @Override

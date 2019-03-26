@@ -3,14 +3,14 @@ package hero.skill;
 import util.SkillResult;
 
 public abstract class Skill {
-    protected int level=0;
+    protected int level = 0;
     protected int cost;
 
-    public SkillResult execute(int attack){
+    public SkillResult execute(int attack) {
         return new SkillResult();
     }
 
-    public void levelUp(){
+    public void levelUp() {
         this.level++;
     }
 

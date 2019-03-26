@@ -2,7 +2,7 @@ package item;
 
 import util.ResultMessage;
 
-public abstract class Armor{
+public abstract class Armor {
     //武器名称
     private String name = "盔甲";
 
