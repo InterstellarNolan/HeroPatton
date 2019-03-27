@@ -12,67 +12,76 @@ import java.util.ArrayList;
 public class Battle {
     private Monster monster;
     private Character character;
-    private boolean end=false;
-    private boolean win=false;
+    private boolean end = false;
+    private boolean win = false;
 
-    public Battle(){}
-
-    public Battle(Character character){
-        this.character=character;
-        this.monster=MonsterFactory.getInstance().createMonster(character.getLevel());
-        this.end=false;
-        this.win=false;
+    public Battle() {
     }
 
-    public ResultMessage attack(){
-        boolean killed=monster.beAttacked((int) character.normalAttack().getT());
-        if(killed){
+    public Battle(Character character) {
+        this.character = character;
+        this.monster = MonsterFactory.getInstance().createMonster(character.getLevel());
+        this.end = false;
+        this.win = false;
+    }
+
+    public ResultMessage attack() {
+        boolean killed = monster.beAttacked((int) character.normalAttack().getT());
+        if (killed) {
             this.getReward();
         }
-        killed=character.beAttacked(monster.attack());
-        if(killed){
+        killed = character.beAttacked(monster.attack());
+        if (killed) {
             this.beKilled();
         }
         return new ResultMessage(true, "下一回合", 0);
     }
 
-    public ResultMessage skill(ArrayList<Skill> skills){
-        int cost=0;
-        for(Skill skill:skills){
-            cost+=skill.getCost();
+    public ResultMessage skill(ArrayList<Integer> skills) {
+        ResultMessage result = this.character.getRole().useSkill(skills);
+        if(result.isSuccess()){
+            boolean killed=this.monster.beAttacked((Integer) result.getT());
         }
-        if(cost>this.character.getMagicPoint()){
-            return  new ResultMessage(false, "MP不够", cost);
-        }else{
-            this.character.setMagicPoint(this.character.getMaxMagicPoint()-cost);
+        return null;
+    }
+
+    public ResultMessage oldskill(ArrayList<Skill> skills) {
+        int cost = 0;
+        for (Skill skill : skills) {
+            cost += skill.getCost();
         }
-        for(Skill skill:skills){
-            SkillResult result=skill.execute(character.getWeapon().getDamage());
-            if(result.getDamage()>0){
-                boolean killed=this.monster.beAttacked(result.getDamage());
-                if(killed){
+        if (cost > this.character.getMagicPoint()) {
+            return new ResultMessage(false, "MP不够", cost);
+        } else {
+            this.character.setMagicPoint(this.character.getMagicPoint() - cost);
+        }
+        for (Skill skill : skills) {
+            SkillResult result = skill.execute(character.getWeapon().getDamage());
+            if (result.getDamage() > 0) {
+                boolean killed = this.monster.beAttacked(result.getDamage());
+                if (killed) {
 
                     this.getReward();
 
                 }
             }
-            if(result.getHeal()>0){
+            if (result.getHeal() > 0) {
                 this.character.heal(result.getHeal());
             }
         }
 
-        boolean beKilled=character.beAttacked(monster.attack());
-        if(beKilled){
-           this.beKilled();
+        boolean beKilled = character.beAttacked(monster.attack());
+        if (beKilled) {
+            this.beKilled();
         }
 
         return new ResultMessage(true, "下一回合", 0);
     }
 
-    private ResultMessage getReward(){
-        this.end=true;
-        this.win=true;
-        int coin=this.character.getCoin()+this.monster.getCoin();
+    private ResultMessage getReward() {
+        this.end = true;
+        this.win = true;
+        int coin = this.character.getCoin() + this.monster.getCoin();
         this.character.setCoin(coin);
         this.character.levelUp();
         this.character.setHealthPoint(this.character.getMaxHealthPoint());
@@ -81,10 +90,9 @@ public class Battle {
     }
 
 
-
-    private ResultMessage beKilled(){
-        this.end=true;
-        this.win=false;
+    private ResultMessage beKilled() {
+        this.end = true;
+        this.win = false;
         return new ResultMessage(false, "战斗失败", 0);
     }
 

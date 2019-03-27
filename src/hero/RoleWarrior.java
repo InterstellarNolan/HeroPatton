@@ -121,20 +121,5 @@ public class RoleWarrior implements Role {
 
     }
 
-    /**
-     * 回血
-     *
-     * @param value
-     * @return
-     */
-    // @Override
-    public ResultMessage heal(int value) {
-        int hp = this.character.getHealthPoint() + value;
-        if (hp > this.character.getMaxHealthPoint()) {
-            value = hp - this.character.getMaxHealthPoint();
-            hp = this.character.getMaxHealthPoint();
-        }
-        this.character.setHealthPoint(hp);
-        return new ResultMessage(true, "回复".concat(String.valueOf(value) + "点血量"), value);
-    }
+
 }

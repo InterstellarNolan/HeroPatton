@@ -3,6 +3,8 @@ package hero;
 import monster.Monster;
 import util.ResultMessage;
 
+import java.util.ArrayList;
+
 public interface Role {
 
     Character getCharacter();
@@ -18,4 +20,6 @@ public interface Role {
     boolean beAttacked(int damage);
 
     //ResultMessage heal(int value);
+
+    ResultMessage useSkill(ArrayList<Integer> list);
 }

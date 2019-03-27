@@ -1,16 +1,27 @@
 package hero;
 
+import hero.skill.HunterSkill1;
+import hero.skill.HunterSkill2;
+import hero.skill.Skill;
 import item.Weapon;
 import util.ResultMessage;
+import util.SkillResult;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class RoleHunter implements Role {
 
     private Character character;
 
+
+    private ArrayList<Skill> skills;
+
     public RoleHunter(Character character) {
         this.character = character;
+        skills.add(new HunterSkill1());
+        skills.add(new HunterSkill2());
     }
 
 
@@ -128,19 +139,38 @@ public class RoleHunter implements Role {
     }
 
     /**
-     * 回血
+     * 使用技能
      *
-     * @param value 回了多少血
+     * @param list
      * @return
      */
-    //@Override
-    public ResultMessage heal(int value) {
-        int hp = this.character.getHealthPoint() + value;
-        if (hp > this.character.getMaxHealthPoint()) {
-            value = hp - this.character.getMaxHealthPoint();
-            hp = this.character.getMaxHealthPoint();
+    @Override
+    public ResultMessage useSkill(ArrayList<Integer> list) {
+        List<Integer> dmgAndHeal = new ArrayList<>();
+
+        ArrayList<Skill> usedSkills = new ArrayList<>();
+        for (int i : list) {
+            Skill skill = skills.get(i);
+            int cost = skill.getCost();
+            if (cost > this.character.getMagicPoint()) {
+                if (usedSkills.size() == 0) {
+                    return new ResultMessage(false, "MP不够，无法施展任何技能", dmgAndHeal);
+                }
+                return new ResultMessage(true, "MP不够，仅使用了部分技能", dmgAndHeal);
+            } else {
+                usedSkills.add(skills.get(i));
+                SkillResult skillResult = skill.execute(this.character.getWeapon().getDamage());
+                int resultDamage = skillResult.getDamage();
+                int resultHeal = skillResult.getHeal();
+                dmgAndHeal.add(resultDamage);
+                dmgAndHeal.add(resultHeal);
+                this.character.setMagicPoint(this.character.getMagicPoint() - cost);
+            }
         }
-        this.character.setHealthPoint(hp);
-        return new ResultMessage(true, "回复".concat(String.valueOf(value) + "点血量"), value);
+
+
+        return new ResultMessage(true, "使用技能", dmgAndHeal);
     }
+
+
 }
