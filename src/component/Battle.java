@@ -37,10 +37,22 @@ public class Battle {
         return new ResultMessage(true, "下一回合", 0);
     }
 
+    /**
+     * 战斗中角色使用技能，并对怪物造成伤害
+     * @param skills 技能列表，0是职业技能1，1是职业技能2
+     * @return
+     */
     public ResultMessage skill(ArrayList<Integer> skills) {
-        ResultMessage result = this.character.getRole().useSkill(skills);
-        if(result.isSuccess()){
-            boolean killed=this.monster.beAttacked((Integer) result.getT());
+        ResultMessage roleSkillResult = this.character.getRole().useSkill(skills);
+        if (roleSkillResult.isSuccess()) {
+            boolean monsterKilled = this.monster.beAttacked((Integer) roleSkillResult.getT());
+            if (monsterKilled) {
+                this.getReward();
+            } else {
+                return new ResultMessage(true, roleSkillResult.getInformation().concat("；怪物受到" + Integer.valueOf((Integer) roleSkillResult.getT())), (Integer) roleSkillResult.getT());
+            }
+        } else {
+            return roleSkillResult;
         }
         return null;
     }

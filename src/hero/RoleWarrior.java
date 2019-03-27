@@ -1,16 +1,25 @@
 package hero;
 
+import hero.skill.Skill;
+import hero.skill.WarriorSkill1;
+import hero.skill.WarriorSkill2;
 import item.Weapon;
 import util.ResultMessage;
+import util.SkillResult;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class RoleWarrior implements Role {
 
     private Character character;
 
+    private ArrayList<Skill> skills;
+
     public RoleWarrior(Character character) {
         this.character = character;
+        this.skills.add(new WarriorSkill1());
+        this.skills.add(new WarriorSkill2());
     }
 
 
@@ -119,6 +128,41 @@ public class RoleWarrior implements Role {
             return false;
         }
 
+    }
+
+    /**
+     * 使用技能，带治疗效果的在本类中立即对角色进行治疗，带伤害效果的返回伤害数值给Battle战斗
+     *
+     * @param list 使用技能（按键1或2）对应猎人技能（0或1）
+     * @return
+     */
+    @Override
+    public ResultMessage useSkill(ArrayList<Integer> list) {
+        int damage = 0;
+        ArrayList<Skill> usedSkills = new ArrayList<>();
+        String healInfo =" ";
+        for (int i : list) {
+            Skill skill = skills.get(i);
+            int cost = skill.getCost();
+            if (cost > this.character.getMagicPoint()) {
+                if (usedSkills.size() == 0) {
+                    return new ResultMessage(false, "战士MP不够，无法施展任何技能", damage);
+                }
+                return new ResultMessage(true, "战士MP不够，仅使用了部分技能", damage);
+            } else {
+                usedSkills.add(skills.get(i));
+                SkillResult skillResult = skill.execute(this.character.getWeapon().getDamage());
+                int resultDamage = skillResult.getDamage();
+                int resultHeal = skillResult.getHeal();
+
+                if (resultHeal > 0) {
+                    ResultMessage healResult = this.character.heal(resultHeal);
+                    healInfo = healResult.getInformation();
+                }
+                this.character.setMagicPoint(this.character.getMagicPoint() - cost);
+            }
+        }
+        return new ResultMessage(true, "战士使用技能；".concat(healInfo), damage);
     }
 
 

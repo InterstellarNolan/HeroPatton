@@ -15,7 +15,6 @@ public class RoleHunter implements Role {
 
     private Character character;
 
-
     private ArrayList<Skill> skills;
 
     public RoleHunter(Character character) {
@@ -139,37 +138,40 @@ public class RoleHunter implements Role {
     }
 
     /**
-     * 使用技能
+     * 使用技能，带治疗效果的在本类中立即对角色进行治疗，带伤害效果的返回伤害数值给Battle战斗
      *
-     * @param list
+     * @param list 使用技能（按键1或2）对应猎人技能（0或1）
      * @return
      */
     @Override
     public ResultMessage useSkill(ArrayList<Integer> list) {
-        List<Integer> dmgAndHeal = new ArrayList<>();
-
+        int damage = 0;
         ArrayList<Skill> usedSkills = new ArrayList<>();
+        String healInfo =" ";
         for (int i : list) {
             Skill skill = skills.get(i);
             int cost = skill.getCost();
             if (cost > this.character.getMagicPoint()) {
                 if (usedSkills.size() == 0) {
-                    return new ResultMessage(false, "MP不够，无法施展任何技能", dmgAndHeal);
+                    return new ResultMessage(false, "猎人MP不够，无法施展任何技能", damage);
                 }
-                return new ResultMessage(true, "MP不够，仅使用了部分技能", dmgAndHeal);
+                return new ResultMessage(true, "猎人MP不够，仅使用了部分技能", damage);
             } else {
                 usedSkills.add(skills.get(i));
                 SkillResult skillResult = skill.execute(this.character.getWeapon().getDamage());
                 int resultDamage = skillResult.getDamage();
                 int resultHeal = skillResult.getHeal();
-                dmgAndHeal.add(resultDamage);
-                dmgAndHeal.add(resultHeal);
+
+                if (resultHeal > 0) {
+                    ResultMessage healResult = this.character.heal(resultHeal);
+                    healInfo = healResult.getInformation();
+                }
                 this.character.setMagicPoint(this.character.getMagicPoint() - cost);
             }
         }
 
 
-        return new ResultMessage(true, "使用技能", dmgAndHeal);
+        return new ResultMessage(true, "猎人使用技能；".concat(healInfo), damage);
     }
 
 
