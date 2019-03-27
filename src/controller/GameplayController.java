@@ -26,7 +26,7 @@ public class GameplayController {
 
     }
 
-    public void endGame(){
+    public void newGame(){
 
     }
 
