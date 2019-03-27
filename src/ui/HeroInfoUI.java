@@ -25,6 +25,8 @@ public class HeroInfoUI {
         return this.heroInfoPanel;
     }
 
+    public void refresh(){
 
+    }
 
 }
