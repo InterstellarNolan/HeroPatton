@@ -4,6 +4,9 @@ import controller.OperationController;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class BattleOperationPanel {
     private JPanel btPanel;
@@ -34,6 +37,39 @@ public class BattleOperationPanel {
     }
 
     public void initializeController(OperationController operationController){
+        this.attack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                operationController.attack();
+            }
+        });
+
+        this.skill1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ArrayList<Integer> skills=new ArrayList<Integer>();
+                skills.add(0);
+                operationController.skill(skills);
+            }
+        });
+        this.skill2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ArrayList<Integer> skills=new ArrayList<Integer>();
+                skills.add(1);
+                operationController.skill(skills);
+            }
+        });
+        this.skills.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ArrayList<Integer> skills=new ArrayList<Integer>();
+                skills.add(0);
+                skills.add(1);
+                operationController.skill(skills);
+            }
+        });
+
 
     }
 
