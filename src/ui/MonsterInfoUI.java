@@ -1,7 +1,9 @@
 package ui;
 
-public class MonsterInfoUI {
+import monster.Monster;
 
+public class MonsterInfoUI {
+    private Monster monster;
 
 
 
@@ -9,4 +11,11 @@ public class MonsterInfoUI {
 
     }
 
+    public Monster getMonster() {
+        return monster;
+    }
+
+    public void setMonster(Monster monster) {
+        this.monster = monster;
+    }
 }

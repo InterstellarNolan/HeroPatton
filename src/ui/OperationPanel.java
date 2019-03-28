@@ -9,15 +9,23 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 
-//废弃
-public class BattleOperationPanel {
-    private JPanel btPanel;
+public class OperationPanel {
+    private JPanel btnPanel;
+    private JPanel currentPanel;
+    private JPanel battleBtn;
+    private JPanel afterBattleBtn;
+
     private JButton attack;
     private JButton skill1;
     private JButton skill2;
     private JButton skills;
+    private JButton next;
+    private JButton shop;
+    private JButton end;
 
-    public BattleOperationPanel(){
+    private CardLayout card;
+
+    public OperationPanel(){
         initializeUI();
     }
 
@@ -27,15 +35,37 @@ public class BattleOperationPanel {
         this.skill1 = new JButton("技能1");
         this.skill2 = new JButton("技能2");
         this.skills = new JButton("组合技能");
+        
+        this.battleBtn = new JPanel();
+        battleBtn.setLayout(new GridLayout(3, 5));
+        battleBtn.add(attack);
+        battleBtn.add(skill1);
+        battleBtn.add(skill2);
+        battleBtn.add(skills);
 
+        this.next = new JButton("下一场");
+        this.shop = new JButton("商店");
+        this.end = new JButton("结束");
+        this.afterBattleBtn = new JPanel();
+        afterBattleBtn.setLayout(new GridLayout(2, 5));
+        afterBattleBtn.add(next);
+        afterBattleBtn.add(shop);
+        afterBattleBtn.add(end);
 
-        this.btPanel = new JPanel();
-        btPanel.setLayout(new GridLayout(3, 5));
-        btPanel.add(attack);
-        btPanel.add(skill1);
-        btPanel.add(skill2);
-        btPanel.add(skills);
+        card = new CardLayout(5, 5);
+        btnPanel=new JPanel(card);
+        btnPanel.add(battleBtn,"battle");
+        btnPanel.add(afterBattleBtn,"after");
 
+    }
+
+    public void changeToBattle(){
+        this.currentPanel=battleBtn;
+        card.show(btnPanel,"battle");
+    }
+    public void changeToAfter(){
+        this.currentPanel=afterBattleBtn;
+        card.show(btnPanel,"after");
     }
 
     public void initializeController(OperationController operationController){
@@ -72,13 +102,31 @@ public class BattleOperationPanel {
             }
         });
 
+        this.next.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                operationController.nextBattle();
+            }
+        });
+        this.shop.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                operationController.goToShop();
+            }
+        });
+        this.end.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                operationController.endGame();
+            }
+        });
 
 
     }
 
 
-    public JPanel getBtPanel(){
-        return this.btPanel;
+    public JPanel getCurrentPanel(){
+        return this.currentPanel;
     }
 
     public void enableButtons(){
@@ -94,5 +142,7 @@ public class BattleOperationPanel {
         this.skill2.setEnabled(false);
         this.skills.setEnabled(false);
     }
+
+
 
 }

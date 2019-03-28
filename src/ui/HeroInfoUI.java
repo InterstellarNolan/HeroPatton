@@ -1,11 +1,13 @@
 package ui;
 
+import hero.Character;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 
 public class HeroInfoUI {
-
+    private Character character;
     private JPanel heroInfoPanel;
     public HeroInfoUI(Character character){
         initialize(character);

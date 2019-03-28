@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
+//废弃
 public class AfterBattlePanel {
     private JPanel btPanel;
     private JButton next;

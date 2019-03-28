@@ -54,7 +54,12 @@ public class Battle {
         } else {
             return roleSkillResult;
         }
-        return null;
+        boolean killed = character.beAttacked(monster.attack());
+        if (killed) {
+            this.beKilled();
+        }
+
+        return  new ResultMessage(true, "下一回合", 0);
     }
 
     public ResultMessage oldskill(ArrayList<Skill> skills) {

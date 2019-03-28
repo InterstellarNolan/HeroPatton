@@ -14,20 +14,9 @@ public class GameplayController {
     private MonsterInfoUI monsterUI;
 
     public void activeController(){
-        this.afterBattlePanel.initializeController(this);
-    }
-
-    public void nextBattle(){
-        Battle battle=new Battle(this.character);
 
     }
 
-    public void goToShop(){
 
-    }
-
-    public void newGame(){
-
-    }
 
 }
