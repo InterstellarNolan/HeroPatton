@@ -36,7 +36,7 @@ public class AfterBattlePanel {
         return this.btPanel;
     }
 
-    public void initializeController(GameplayController gameplayController){
+    public void initializeController(OperationController gameplayController){
         this.next.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -52,7 +52,7 @@ public class AfterBattlePanel {
         this.end.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gameplayController.newGame();
+                gameplayController.endGame();
             }
         });
 

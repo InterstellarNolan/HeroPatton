@@ -19,6 +19,7 @@ public class RoleHunter implements Role {
 
     public RoleHunter(Character character) {
         this.character = character;
+        skills=new ArrayList<Skill>();
         skills.add(new HunterSkill1());
         skills.add(new HunterSkill2());
     }

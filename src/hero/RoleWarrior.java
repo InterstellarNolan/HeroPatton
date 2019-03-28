@@ -4,6 +4,7 @@ import hero.skill.Skill;
 import hero.skill.WarriorSkill1;
 import hero.skill.WarriorSkill2;
 import item.Weapon;
+import item.WeaponSword;
 import util.ResultMessage;
 import util.SkillResult;
 
@@ -18,6 +19,8 @@ public class RoleWarrior implements Role {
 
     public RoleWarrior(Character character) {
         this.character = character;
+        this.character.setWeapon(new WeaponSword("剑","des",10));
+        skills=new ArrayList<Skill>();
         this.skills.add(new WarriorSkill1());
         this.skills.add(new WarriorSkill2());
     }
