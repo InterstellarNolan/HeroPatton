@@ -3,6 +3,7 @@ package hero;
 import hero.skill.HunterSkill1;
 import hero.skill.HunterSkill2;
 import hero.skill.Skill;
+import item.ItemFactory;
 import item.Weapon;
 import util.ResultMessage;
 import util.SkillResult;
@@ -19,9 +20,11 @@ public class RoleHunter implements Role {
 
     public RoleHunter(Character character) {
         this.character = character;
-        skills=new ArrayList<Skill>();
-        skills.add(new HunterSkill1());
-        skills.add(new HunterSkill2());
+        this.character.setWeapon(ItemFactory.getInstance().createWeapon(this.getRole()));
+        this.character.setArmor(ItemFactory.getInstance().createArmor(this.getRole()));
+        skills = new ArrayList<Skill>();
+        this.skills.add(new HunterSkill1());
+        this.skills.add(new HunterSkill2());
     }
 
 
@@ -147,7 +150,7 @@ public class RoleHunter implements Role {
     public ResultMessage useSkill(ArrayList<Integer> list) {
         int damage = 0;
         ArrayList<Skill> usedSkills = new ArrayList<>();
-        String healInfo =" ";
+        String healInfo = " ";
         for (int i : list) {
             Skill skill = skills.get(i);
             int cost = skill.getCost();
@@ -161,7 +164,7 @@ public class RoleHunter implements Role {
                 SkillResult skillResult = skill.execute(this.character.getWeapon().getDamage());
                 int resultDamage = skillResult.getDamage();
                 int resultHeal = skillResult.getHeal();
-                damage+=resultDamage;
+                damage += resultDamage;
                 if (resultHeal > 0) {
                     ResultMessage healResult = this.character.heal(resultHeal);
                     healInfo = healResult.getInformation();

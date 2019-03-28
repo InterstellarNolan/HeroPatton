@@ -36,7 +36,6 @@ public class Character {
     private int experience = 0;
 
 
-
     //闪避率
     private double evadeRate = 0.05;
 
@@ -71,34 +70,35 @@ public class Character {
         }
         this.role = role;
     }
+    public String getCharacterInfo(){
+        String result="角色名称："+this.getName()+"| HP："+String.valueOf(this.getHealthPoint())+" |MaxHP："+String.valueOf(this.getMaxHealthPoint())+" |MP："+String.valueOf(this.getMagicPoint())+" ：MaxMP："+String.valueOf(this.getMaxMagicPoint())+" |职业："+this.getRole().getRole()+" |等级："+String.valueOf(this.getLevel())+" |盔甲："+this.getArmor().getName()+" |额外血量："+String.valueOf(this.getArmor().getExtraHP())+" |武器："+this.getWeapon().getName()+" |伤害："+String.valueOf(this.getWeapon().getDamage());
+        return result;
+    }
 
-    public ResultMessage levelUp(){
+    public ResultMessage levelUp() {
         return role.levelUp();
     }
 
     //普通攻击，返回是否命中，伤害数值
-    public ResultMessage normalAttack(){
+    public ResultMessage normalAttack() {
         return role.normalAttack();
     }
 
     //被打败返回true
-    public boolean beAttacked(int damage){
+    public boolean beAttacked(int damage) {
         return role.beAttacked(damage);
     }
 
-    public ResultMessage heal(int value){
+    public ResultMessage heal(int value) {
 
-        int hp = this.getHealthPoint()+value;
-        if(hp>this.getMaxHealthPoint()){
+        int hp = this.getHealthPoint() + value;
+        if (hp > this.getMaxHealthPoint()) {
             value = hp - this.getMaxHealthPoint();
-            hp=this.getMaxHealthPoint();
+            hp = this.getMaxHealthPoint();
         }
         this.setHealthPoint(hp);
         return new ResultMessage(true, "回复".concat(String.valueOf(value) + "点血量"), value);
     }
-
-
-
 
 
     public String getName() {
@@ -190,6 +190,7 @@ public class Character {
 
     /**
      * 装备武器
+     *
      * @param weapon
      */
     public void setWeapon(Weapon weapon) {
@@ -202,10 +203,15 @@ public class Character {
 
     /**
      * 装备盔甲
+     *
      * @param armor
      */
     public void setArmor(Armor armor) {
         this.armor = armor;
+        if (armor != null) {
+            this.setMaxHealthPoint(this.getHealthPoint() + armor.getExtraHP());
+            this.setHealthPoint(this.getHealthPoint() + armor.getExtraHP());
+        }
     }
 }
 

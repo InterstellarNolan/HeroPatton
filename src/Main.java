@@ -11,6 +11,7 @@ public class Main {
 
         Character character=new Character("player","warrior");
         Battle battle=new Battle(character);
+        System.out.println(character.getCharacterInfo());
         while (true){
             try {
                 char i = (char) System.in.read();
@@ -43,6 +44,7 @@ public class Main {
             }
             String s="怪物"+String.valueOf(battle.getMonster().getHealthPoint())+"  "+"人物"+String.valueOf(battle.getCharacter().getHealthPoint());
             System.out.println(s);
+            System.out.println(character.getCharacterInfo());
             if (battle.isEnd()){
                 if(battle.isWin()){
                     System.out.println("你赢了");

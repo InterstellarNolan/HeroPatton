@@ -101,8 +101,6 @@ public class Battle {
         int coin = this.character.getCoin() + this.monster.getCoin();
         this.character.setCoin(coin);
         this.character.levelUp();
-        this.character.setHealthPoint(this.character.getMaxHealthPoint());
-        this.character.setMagicPoint(this.character.getMaxMagicPoint());
         return new ResultMessage(true, "战斗胜利", 0);
     }
 
