@@ -38,7 +38,7 @@ public class ArmorLight extends Armor {
             resultMessage = new ResultMessage(true, "盔甲已升级到" + String.valueOf(level) + "级", level);
             return resultMessage;
         } else {
-            resultMessage = new ResultMessage(false, "武器升级失败，已达到100级", level);
+            resultMessage = new ResultMessage(false, "盔甲升级失败，已达到100级", level);
             return resultMessage;
         }
     }

@@ -81,4 +81,8 @@ public abstract class Armor {
     public void setLeftStrength(int leftStrength) {
         this.leftStrength = leftStrength;
     }
+
+    public ResultMessage levelUp() {
+        return new ResultMessage(false, "升级失败，不是具体盔甲", level);
+    }
 }

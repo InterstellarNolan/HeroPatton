@@ -44,22 +44,24 @@ public class Battle {
      */
     public ResultMessage skill(ArrayList<Integer> skills) {
         ResultMessage roleSkillResult = this.character.getRole().useSkill(skills);
+        String info="";
+        int damage=0;
         if (roleSkillResult.isSuccess()) {
             boolean monsterKilled = this.monster.beAttacked((Integer) roleSkillResult.getT());
             if (monsterKilled) {
-                this.getReward();
+                return this.getReward();
             } else {
-                return new ResultMessage(true, roleSkillResult.getInformation().concat("；怪物受到" + Integer.valueOf((Integer) roleSkillResult.getT())), (Integer) roleSkillResult.getT());
+                info=roleSkillResult.getInformation().concat("；怪物受到" + Integer.valueOf((Integer) roleSkillResult.getT()));
             }
         } else {
-            return roleSkillResult;
+            info= roleSkillResult.getInformation();
         }
         boolean killed = character.beAttacked(monster.attack());
         if (killed) {
-            this.beKilled();
+            return this.beKilled();
         }
 
-        return  new ResultMessage(true, "下一回合", 0);
+        return  new ResultMessage(true, "下一回合；".concat(info), 0);
     }
 
     public ResultMessage oldskill(ArrayList<Skill> skills) {

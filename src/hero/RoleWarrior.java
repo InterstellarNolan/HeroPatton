@@ -3,6 +3,7 @@ package hero;
 import hero.skill.Skill;
 import hero.skill.WarriorSkill1;
 import hero.skill.WarriorSkill2;
+import item.Armor;
 import item.ItemFactory;
 import item.Weapon;
 import item.WeaponSword;
@@ -46,6 +47,7 @@ public class RoleWarrior implements Role {
      */
     @Override
     public ResultMessage levelUp() {
+        String message = " ";
         /**
          * Warrior等级提升一级（不超过100级）
          */
@@ -56,17 +58,11 @@ public class RoleWarrior implements Role {
             return new ResultMessage(false, "角色升级失败，已达到100级", currentLevel);
         }
 
-        int healthPoint = this.character.getMaxHealthPoint() + 50 * currentLevel;
-        this.character.setMaxHealthPoint(healthPoint);
-        this.character.setHealthPoint(healthPoint);
-
-        int magicPoint = this.character.getMaxMagicPoint() + 20 * currentLevel;
-        this.character.setMaxMagicPoint(magicPoint);
-        this.character.setMagicPoint(magicPoint);
 
         /**
          * 武器升级
          */
+        int extraHP = 0;
         if (this.character.getWeapon() != null) {
             Weapon weapon = this.character.getWeapon();
             ResultMessage resultMessage = weapon.levelUp();
@@ -74,9 +70,32 @@ public class RoleWarrior implements Role {
                 return new ResultMessage(true, "战士角色升级成功，武器升级失败", currentLevel + 1);
             }
         }
+        /**
+         * 盔甲升级
+         */
+        if (this.character.getArmor() != null) {
+            Armor armor = this.character.getArmor();
 
+            this.character.setMaxHealthPoint(this.character.getMaxHealthPoint()-armor.getExtraHP());
+            ResultMessage resultMessage = armor.levelUp();
+            extraHP = armor.getExtraHP();
+            if (!resultMessage.isSuccess()) {
+                message = "战士角色升级成功，".concat(resultMessage.getInformation());
+            }
+        }
+        int healthPoint = this.character.getMaxHealthPoint() + 50 * currentLevel+extraHP;
+        System.out.println();
+        System.out.println(healthPoint);
+        System.out.println();
+        this.character.setMaxHealthPoint(healthPoint);
+        this.character.setHealthPoint(healthPoint);
 
-        return new ResultMessage(true, "战士角色升级成功", currentLevel + 1);
+        int magicPoint = this.character.getMaxMagicPoint() + 20 * currentLevel;
+        this.character.setMaxMagicPoint(magicPoint);
+        this.character.setMagicPoint(magicPoint);
+
+        message = "战士角色升级成功";
+        return new ResultMessage(true, message, currentLevel + 1);
 
 
     }
