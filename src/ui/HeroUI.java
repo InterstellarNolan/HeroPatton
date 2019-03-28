@@ -32,6 +32,22 @@ public class HeroUI {
         initializeUI();
     }
 
+    public HeroUI(Character character) {
+        this.character = character;
+        Battle battle=new Battle(character);
+        this.heroInfoUI=new HeroInfoUI(character);
+        this.monsterInfoUI=new MonsterInfoUI(battle.getMonster());
+        this.operationPanel=new OperationPanel();
+        operationPanel.changeToBattle();
+        this.infoBoard=new InfoBoard();
+
+        this.operationController=new OperationController(character,battle,heroInfoUI,monsterInfoUI,operationPanel);
+
+        initializeUI();
+    }
+
+
+
     private void initializeUI(){
         this.frame = new JFrame("HeroPattern");
         frame.setSize(400, 400);
