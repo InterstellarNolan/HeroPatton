@@ -19,16 +19,17 @@ public class InitializeController {
     }
 
     public void gameStart(String name, String role) {
-        String roleName = "Warrior";
+
+        String roleName="warrior";
         if (name.equals("")) {
             name = "新玩家";
         }
         if (role.equals("战士")) {
-            roleName = "Warrior";
+            roleName = "warrior";
         } else if (role.equals("猎人")) {
-            roleName = "Hunter";
+            roleName = "hunter";
         }
-        character = new Character(name, roleName);
+        this.character = new Character(name, roleName);
         welcomeUI.getFrame().dispose();
         HeroUI heroUI = new HeroUI(character);
     }
