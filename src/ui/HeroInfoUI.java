@@ -13,7 +13,7 @@ public class HeroInfoUI {
         initialize(character);
     }
 
-    private void initialize(Character heroDescription){
+    private void initialize(Character character){
         this.heroInfoPanel = new JPanel();
         this.heroInfoPanel.setLayout(new BorderLayout());
 
@@ -31,4 +31,11 @@ public class HeroInfoUI {
 
     }
 
+    public Character getCharacter() {
+        return character;
+    }
+
+    public void setCharacter(Character character) {
+        this.character = character;
+    }
 }
