@@ -37,7 +37,7 @@ public class OperationPanel {
         this.skills = new JButton("组合技能");
         
         this.battleBtn = new JPanel();
-        battleBtn.setLayout(new GridLayout(3, 5));
+        battleBtn.setLayout(new GridLayout(4, 1));
         battleBtn.add(attack);
         battleBtn.add(skill1);
         battleBtn.add(skill2);
@@ -47,15 +47,17 @@ public class OperationPanel {
         this.shop = new JButton("商店");
         this.end = new JButton("结束");
         this.afterBattleBtn = new JPanel();
-        afterBattleBtn.setLayout(new GridLayout(2, 5));
+        afterBattleBtn.setLayout(new GridLayout(3, 1));
         afterBattleBtn.add(next);
         afterBattleBtn.add(shop);
         afterBattleBtn.add(end);
 
-        card = new CardLayout(5, 5);
+        //card = new CardLayout(5, 5);
+        card = new CardLayout();
         btnPanel=new JPanel(card);
         btnPanel.add(battleBtn,"battle");
         btnPanel.add(afterBattleBtn,"after");
+        btnPanel.setVisible(true);
 
     }
 
