@@ -54,7 +54,7 @@ public class RoleWarrior implements Role {
             return new ResultMessage(false, "角色升级失败，已达到100级", currentLevel);
         }
 
-        int healthPoint = this.character.getMaxMagicPoint() + 50 * currentLevel;
+        int healthPoint = this.character.getMaxHealthPoint() + 50 * currentLevel;
         this.character.setMaxHealthPoint(healthPoint);
         this.character.setHealthPoint(healthPoint);
 
@@ -157,7 +157,7 @@ public class RoleWarrior implements Role {
                 SkillResult skillResult = skill.execute(this.character.getWeapon().getDamage());
                 int resultDamage = skillResult.getDamage();
                 int resultHeal = skillResult.getHeal();
-
+                damage+=resultDamage;
                 if (resultHeal > 0) {
                     ResultMessage healResult = this.character.heal(resultHeal);
                     healInfo = healResult.getInformation();

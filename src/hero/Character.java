@@ -87,6 +87,7 @@ public class Character {
     }
 
     public ResultMessage heal(int value){
+
         int hp = this.getHealthPoint()+value;
         if(hp>this.getMaxHealthPoint()){
             value = hp - this.getMaxHealthPoint();

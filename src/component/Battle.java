@@ -28,11 +28,11 @@ public class Battle {
     public ResultMessage attack() {
         boolean killed = monster.beAttacked((int) character.normalAttack().getT());
         if (killed) {
-            this.getReward();
+            return this.getReward();
         }
         killed = character.beAttacked(monster.attack());
         if (killed) {
-            this.beKilled();
+            return this.beKilled();
         }
         return new ResultMessage(true, "下一回合", 0);
     }
