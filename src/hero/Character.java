@@ -75,6 +75,11 @@ public class Character {
         return result;
     }
 
+    public String getInfo(){
+        String result="角色名称："+this.getName()+"\n HP："+String.valueOf(this.getHealthPoint())+" \nMaxHP："+String.valueOf(this.getMaxHealthPoint())+" \nMP："+String.valueOf(this.getMagicPoint())+" \nMaxMP："+String.valueOf(this.getMaxMagicPoint())+" \n职业："+this.getRole().getRole()+" \n等级："+String.valueOf(this.getLevel())+" \n盔甲："+this.getArmor().getName()+" \n额外血量："+String.valueOf(this.getArmor().getExtraHP())+" \n武器："+this.getWeapon().getName()+" \n伤害："+String.valueOf(this.getWeapon().getDamage());
+        return result;
+    }
+
     public ResultMessage levelUp() {
         return role.levelUp();
     }

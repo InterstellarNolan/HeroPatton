@@ -16,23 +16,23 @@ public class HeroInfoUI {
     }
 
     private void initialize(Character character){
+        this.character=character;
         this.heroInfoPanel = new JPanel();
-        this.heroInfoPanel.setLayout(new GridLayout(10,2));
         Border heroTitle = BorderFactory.createTitledBorder("人物信息");
         this.heroInfoPanel.setBorder(heroTitle);
-        this.description=new JTextArea(character.getCharacterInfo());
+        this.description=new JTextArea(character.getInfo());
         this.description.setEditable(false);
-        this.heroInfoPanel.add(this.description);
+        this.heroInfoPanel.add(this.description,BorderLayout.CENTER);
 
         this.heroInfoPanel.setVisible(true);
     }
 
-    public JPanel getHeroInfoPanel(){
+    public JPanel getPanel(){
         return this.heroInfoPanel;
     }
 
     public void refresh(){
-        description.setText(character.getCharacterInfo());
+        description.setText(character.getInfo());
     }
 
     public Character getCharacter() {

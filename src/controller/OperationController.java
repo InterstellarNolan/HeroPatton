@@ -14,7 +14,13 @@ public class OperationController {
     private MonsterInfoUI monsterInfoUI;
     private Character character;
 
-    public  OperationController(){
+    public  OperationController(Character character,Battle battle,HeroInfoUI heroInfoUI,MonsterInfoUI monsterInfoUI,OperationPanel operationPanel){
+        this.character=character;
+        this.heroInfoUI=heroInfoUI;
+        this.monsterInfoUI=monsterInfoUI;
+        this.battle=battle;
+        this.operationPanel=operationPanel;
+        activeController();
 
     }
 
@@ -55,6 +61,7 @@ public class OperationController {
 
     public void nextBattle(){
         Battle battle=new Battle(this.character);
+        this.battle=battle;
         this.monsterInfoUI.setMonster(battle.getMonster());
         this.monsterInfoUI.refresh();
         this.heroInfoUI.refresh();

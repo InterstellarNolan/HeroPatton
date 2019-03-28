@@ -126,6 +126,9 @@ public class OperationPanel {
 
     }
 
+    public JPanel getPanel(){
+        return this.btnPanel;
+    }
 
     public JPanel getCurrentPanel(){
         return this.currentPanel;

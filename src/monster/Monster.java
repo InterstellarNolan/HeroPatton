@@ -52,9 +52,13 @@ public abstract class Monster {
         if(this.healthPoint<=0){
             this.healthPoint=0;
             return true;
-
         }
         return false;
+    }
+
+    public String getInfo(){
+        String result="怪物名："+this.getName()+"\nHP："+String.valueOf(this.getHealthPoint())+" \nMaxHP："+String.valueOf(this.getMaxHealthPoint())+" \n等级："+String.valueOf(this.getLevel())+" \n攻击力："+String.valueOf(this.getAttackValue());
+        return result;
     }
 
 
