@@ -24,7 +24,7 @@ public class WelcomeUI {
     private JButton confirm;
 
     public WelcomeUI() {
-        this.initializeController = new InitializeController(this);
+
 
         this.topPanel = new JPanel();
 
@@ -55,6 +55,8 @@ public class WelcomeUI {
         this.topPanel.setVisible(true);
         this.midPanel.setVisible(true);
         this.btmPanel.setVisible(true);
+        this.initializeController = new InitializeController(this);
+
         initialize();
     }
 
@@ -114,5 +116,18 @@ public class WelcomeUI {
 
         }
 
+    }
+    public void clear(){
+        frame.remove(topPanel);
+        frame.remove(midPanel);
+        frame.remove(btmPanel);
+    }
+
+    public JFrame getFrame() {
+        return frame;
+    }
+
+    public void setFrame(JFrame frame) {
+        this.frame = frame;
     }
 }

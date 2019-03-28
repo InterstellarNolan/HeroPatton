@@ -4,6 +4,7 @@ import component.Battle;
 import hero.Character;
 import ui.*;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class OperationController {
@@ -13,13 +14,15 @@ public class OperationController {
     private HeroInfoUI heroInfoUI;
     private MonsterInfoUI monsterInfoUI;
     private Character character;
+    private HeroUI heroUI;
 
-    public  OperationController(Character character,Battle battle,HeroInfoUI heroInfoUI,MonsterInfoUI monsterInfoUI,OperationPanel operationPanel){
+    public  OperationController(Character character,Battle battle,HeroInfoUI heroInfoUI,MonsterInfoUI monsterInfoUI,OperationPanel operationPanel,HeroUI heroUI){
         this.character=character;
         this.heroInfoUI=heroInfoUI;
         this.monsterInfoUI=monsterInfoUI;
         this.battle=battle;
         this.operationPanel=operationPanel;
+        this.heroUI=heroUI;
         activeController();
 
     }
@@ -37,7 +40,9 @@ public class OperationController {
             if(this.battle.isWin()){
                 this.operationPanel.changeToAfter();
             }else{
-                //lose
+                JOptionPane.showMessageDialog(heroUI.getFrame(), "你被打败了", "游戏结束",JOptionPane.ERROR_MESSAGE);
+                this.heroUI.getFrame().dispose();
+                WelcomeUI welcomeUI=new WelcomeUI();
             }
 
         }
@@ -53,7 +58,9 @@ public class OperationController {
             if(this.battle.isWin()){
                 this.operationPanel.changeToAfter();
             }else{
-                //lose
+                JOptionPane.showMessageDialog(heroUI.getFrame(), "你被打败了", "游戏结束",JOptionPane.ERROR_MESSAGE);
+                this.heroUI.getFrame().dispose();
+                WelcomeUI welcomeUI=new WelcomeUI();
             }
         }
         this.operationPanel.enableButtons();
@@ -73,7 +80,8 @@ public class OperationController {
     }
 
     public void endGame(){
-
+        this.heroUI.getFrame().dispose();
+        WelcomeUI welcomeUI=new WelcomeUI();
     }
 
     public Battle getBattle() {

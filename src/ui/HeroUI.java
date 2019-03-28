@@ -27,7 +27,7 @@ public class HeroUI {
         operationPanel.changeToBattle();
         this.infoBoard=new InfoBoard();
 
-        this.operationController=new OperationController(character,battle,heroInfoUI,monsterInfoUI,operationPanel);
+        this.operationController=new OperationController(character,battle,heroInfoUI,monsterInfoUI,operationPanel,this);
 
         initializeUI();
     }
@@ -41,7 +41,7 @@ public class HeroUI {
         operationPanel.changeToBattle();
         this.infoBoard=new InfoBoard();
 
-        this.operationController=new OperationController(character,battle,heroInfoUI,monsterInfoUI,operationPanel);
+        this.operationController=new OperationController(character,battle,heroInfoUI,monsterInfoUI,operationPanel,this);
 
         initializeUI();
     }
@@ -63,21 +63,18 @@ public class HeroUI {
     }
 
 
-    private static void createAndShowGUI() {
-        // 确保一个漂亮的外观风格
-        JFrame.setDefaultLookAndFeelDecorated(true);
-
-        // 创建及设置窗口
-        JFrame frame = new JFrame("HelloWorldSwing");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // 添加 "Hello World" 标签
-        JLabel label = new JLabel("Hello World");
-        frame.getContentPane().add(label);
-
-        // 显示窗口
-        frame.pack();
-        frame.setVisible(true);
+    public void clear(){
+        frame.remove(this.monsterInfoUI.getPanel());
+        frame.remove(this.heroInfoUI.getPanel());
+        frame.remove(this.infoBoard.getInfoPanel());
+        frame.remove(this.operationPanel.getPanel());
     }
 
+    public JFrame getFrame() {
+        return frame;
+    }
+
+    public void setFrame(JFrame frame) {
+        this.frame = frame;
+    }
 }
