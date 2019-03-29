@@ -84,9 +84,6 @@ public class RoleWarrior implements Role {
             }
         }
         int healthPoint = this.character.getMaxHealthPoint() + 50 * currentLevel+extraHP;
-        System.out.println();
-        System.out.println(healthPoint);
-        System.out.println();
         this.character.setMaxHealthPoint(healthPoint);
         this.character.setHealthPoint(healthPoint);
 

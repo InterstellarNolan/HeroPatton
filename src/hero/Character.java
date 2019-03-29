@@ -70,13 +70,14 @@ public class Character {
         }
         this.role = role;
     }
-    public String getCharacterInfo(){
-        String result="角色名称："+this.getName()+"| HP："+String.valueOf(this.getHealthPoint())+" |MaxHP："+String.valueOf(this.getMaxHealthPoint())+" |MP："+String.valueOf(this.getMagicPoint())+" ：MaxMP："+String.valueOf(this.getMaxMagicPoint())+" |职业："+this.getRole().getRole()+" |等级："+String.valueOf(this.getLevel())+" |盔甲："+this.getArmor().getName()+" |额外血量："+String.valueOf(this.getArmor().getExtraHP())+" |武器："+this.getWeapon().getName()+" |伤害："+String.valueOf(this.getWeapon().getDamage());
+
+    public String getCharacterInfo() {
+        String result = "角色名称：" + this.getName() + "| HP：" + String.valueOf(this.getHealthPoint()) + " |MaxHP：" + String.valueOf(this.getMaxHealthPoint()) + " |MP：" + String.valueOf(this.getMagicPoint()) + " ：MaxMP：" + String.valueOf(this.getMaxMagicPoint()) + " |职业：" + this.getRole().getRole() + " |等级：" + String.valueOf(this.getLevel()) + " |盔甲：" + this.getArmor().getName() + " |额外血量：" + String.valueOf(this.getArmor().getExtraHP()) + " |武器：" + this.getWeapon().getName() + " |伤害：" + String.valueOf(this.getWeapon().getDamage());
         return result;
     }
 
-    public String getInfo(){
-        String result="角色名称："+this.getName()+"\n HP："+String.valueOf(this.getHealthPoint())+" \nMaxHP："+String.valueOf(this.getMaxHealthPoint())+" \nMP："+String.valueOf(this.getMagicPoint())+" \nMaxMP："+String.valueOf(this.getMaxMagicPoint())+" \n职业："+this.getRole().getRole()+" \n等级："+String.valueOf(this.getLevel())+" \n盔甲："+this.getArmor().getName()+" \n额外血量："+String.valueOf(this.getArmor().getExtraHP())+" \n武器："+this.getWeapon().getName()+" \n伤害："+String.valueOf(this.getWeapon().getDamage());
+    public String getInfo() {
+        String result = "角色名称：" + this.getName() + " \nHP：" + String.valueOf(this.getHealthPoint()) + " \nMaxHP：" + String.valueOf(this.getMaxHealthPoint()) + " \nMP：" + String.valueOf(this.getMagicPoint()) + " \nMaxMP：" + String.valueOf(this.getMaxMagicPoint()) + " \n职业：" + this.getRole().getRole() + " \n等级：" + String.valueOf(this.getLevel()) + " \n盔甲：" + this.getArmor().getName() + " \n额外血量：" + String.valueOf(this.getArmor().getExtraHP()) + " \n武器：" + this.getWeapon().getName() + " \n伤害：" + String.valueOf(this.getWeapon().getDamage()) + " \n金钱：" + String.valueOf(this.getCoin());
         return result;
     }
 
