@@ -31,6 +31,11 @@ public abstract class Weapon {
     //命中率
     private double hitRate = 0.9;
 
+    public String getInfo(){
+        String result="武器名："+this.getName()+"\n职业："+this.getWeaponType()+" \n等级："+String.valueOf(this.getLevel())+" \n伤害："+String.valueOf(this.getDamage())+"\n介绍："+this.getDescription()+" \n剩余强化次数："+String.valueOf(this.getLeftStrength());
+        return  result;
+    }
+
     public ResultMessage levelUp() {
         return new ResultMessage(false, "升级失败，不是具体武器", level);
     }

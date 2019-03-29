@@ -24,6 +24,12 @@ public abstract class Armor {
     //剩余加强次数
     private int leftStrength = 5;
 
+    public String getInfo(){
+        String result="防具名："+this.getName()+"\n职业："+this.getArmorType()+" \n等级："+String.valueOf(this.getLevel())+" \n额外血量："+String.valueOf(this.getExtraHP())+"\n介绍："+this.getDescription()+" \n剩余强化次数："+String.valueOf(this.getLeftStrength());
+        return  result;
+    }
+
+
     public abstract ResultMessage strength();
 
     public String getName() {
