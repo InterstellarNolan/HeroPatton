@@ -123,7 +123,7 @@ public class RoleHunter implements Role {
             if(!hit){
                 return new ResultMessage(hit, "未命中；", damage);
             }
-            return new ResultMessage(hit, "造成".concat(String.valueOf(damage) + "点" + weapon.getDamageType() + "；"), damage);
+            return new ResultMessage(hit, "英雄发动攻击，造成".concat(String.valueOf(damage) + "点" + weapon.getDamageType() + "；"), damage);
             //没有武器 造成80%命中的石块伤害
         } else {
             //5乘角色等级，加2-6点伤害
