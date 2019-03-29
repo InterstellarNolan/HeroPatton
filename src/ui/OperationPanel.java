@@ -44,7 +44,7 @@ public class OperationPanel {
         battleBtn.add(skills);
 
         this.next = new JButton("下一场");
-        this.shop = new JButton("商店");
+        this.shop = new JButton("强化装备");
         this.end = new JButton("结束");
         this.afterBattleBtn = new JPanel();
         afterBattleBtn.setLayout(new GridLayout(3, 1));

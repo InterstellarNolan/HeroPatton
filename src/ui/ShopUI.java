@@ -40,6 +40,7 @@ public class ShopUI {
         armor.add(enhanceArmor);
         shopPanel.add(weapon);
         shopPanel.add(armor);
+        disableButtons();
     }
 
     public void initializeController(ShopController shopController){

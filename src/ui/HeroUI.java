@@ -30,7 +30,7 @@ public class HeroUI {
         this.infoBoard=new InfoBoard();
 
 
-        this.operationController=new OperationController(character,battle,heroInfoUI,monsterInfoUI,operationPanel,this);
+        //this.operationController=new OperationController(character,battle,heroInfoUI,monsterInfoUI,operationPanel,this);
 
 
         initializeUI();
@@ -46,8 +46,8 @@ public class HeroUI {
         this.infoBoard=new InfoBoard();
         this.shopUI=new ShopUI(character);
 
-        this.operationController=new OperationController(character,battle,heroInfoUI,monsterInfoUI,operationPanel,this);
-        this.shopController=new ShopController(character,shopUI,this);
+        this.operationController=new OperationController(character,battle,heroInfoUI,monsterInfoUI,operationPanel,this,shopUI);
+        this.shopController=new ShopController(character,shopUI,this,heroInfoUI);
 
         initializeUI();
     }
