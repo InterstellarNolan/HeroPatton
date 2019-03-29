@@ -3,6 +3,7 @@ package controller;
 import hero.Character;
 import ui.HeroInfoUI;
 import ui.HeroUI;
+import ui.InfoBoard;
 import ui.ShopUI;
 import util.ResultMessage;
 
@@ -13,10 +14,12 @@ public class ShopController {
     private Character character;
     private HeroUI heroUI;
     private HeroInfoUI heroInfoUI;
+    private InfoBoard infoBoard;
 
-    public ShopController(Character character,ShopUI shopUI,HeroUI heroUI,HeroInfoUI heroInfoUI){
+    public ShopController(Character character,ShopUI shopUI,InfoBoard infoBoard,HeroUI heroUI,HeroInfoUI heroInfoUI){
         this.character=character;
         this.shopUI=shopUI;
+        this.infoBoard=infoBoard;
         this.heroUI=heroUI;
         this.heroInfoUI=heroInfoUI;
 
@@ -33,6 +36,7 @@ public class ShopController {
         if(message.isSuccess()){
             this.shopUI.refresh();
             this.heroInfoUI.refresh();
+            this.infoBoard.setInfoText(message.getInformation());
             JOptionPane.showMessageDialog(heroUI.getFrame(), "强化成功", "成功",JOptionPane.PLAIN_MESSAGE);
         }else{
             JOptionPane.showMessageDialog(heroUI.getFrame(), "强化失败", "失败",JOptionPane.ERROR_MESSAGE);
@@ -45,6 +49,7 @@ public class ShopController {
         if(message.isSuccess()){
             this.shopUI.refresh();
             this.heroInfoUI.refresh();
+            this.infoBoard.setInfoText(message.getInformation());
             JOptionPane.showMessageDialog(heroUI.getFrame(), "强化成功", "成功",JOptionPane.PLAIN_MESSAGE);
         }else{
             JOptionPane.showMessageDialog(heroUI.getFrame(), "强化失败", "失败",JOptionPane.ERROR_MESSAGE);

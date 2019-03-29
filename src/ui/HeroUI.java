@@ -20,14 +20,14 @@ public class HeroUI {
     private OperationController operationController;
     private ShopController shopController;
 
-    public HeroUI(){
-        this.character=new Character("player","warrior");
-        Battle battle=new Battle(character);
-        this.heroInfoUI=new HeroInfoUI(character);
-        this.monsterInfoUI=new MonsterInfoUI(battle.getMonster());
-        this.operationPanel=new OperationPanel();
+    public HeroUI() {
+        this.character = new Character("player", "warrior");
+        Battle battle = new Battle(character);
+        this.heroInfoUI = new HeroInfoUI(character);
+        this.monsterInfoUI = new MonsterInfoUI(battle.getMonster());
+        this.operationPanel = new OperationPanel();
         operationPanel.changeToBattle();
-        this.infoBoard=new InfoBoard();
+        this.infoBoard = new InfoBoard();
 
 
         //this.operationController=new OperationController(character,battle,heroInfoUI,monsterInfoUI,operationPanel,this);
@@ -38,26 +38,25 @@ public class HeroUI {
 
     public HeroUI(Character character) {
         this.character = character;
-        Battle battle=new Battle(character);
-        this.heroInfoUI=new HeroInfoUI(character);
-        this.monsterInfoUI=new MonsterInfoUI(battle.getMonster());
-        this.operationPanel=new OperationPanel();
+        Battle battle = new Battle(character);
+        this.heroInfoUI = new HeroInfoUI(character);
+        this.monsterInfoUI = new MonsterInfoUI(battle.getMonster());
+        this.operationPanel = new OperationPanel();
         operationPanel.changeToBattle();
-        this.infoBoard=new InfoBoard();
-        this.shopUI=new ShopUI(character);
+        this.infoBoard = new InfoBoard();
+        this.shopUI = new ShopUI(character);
 
-        this.operationController=new OperationController(character,battle,heroInfoUI,monsterInfoUI,operationPanel,this,shopUI);
-        this.shopController=new ShopController(character,shopUI,this,heroInfoUI);
+        this.operationController = new OperationController(character, battle, heroInfoUI, monsterInfoUI, operationPanel, infoBoard, this, shopUI);
+        this.shopController = new ShopController(character, shopUI, infoBoard, this, heroInfoUI);
 
         initializeUI();
     }
 
 
-
-    private void initializeUI(){
+    private void initializeUI() {
         this.frame = new JFrame("HeroPattern");
         frame.setSize(800, 600);
-        frame.setLayout(new GridLayout(2,3));
+        frame.setLayout(new GridLayout(2, 3));
         frame.add(this.monsterInfoUI.getPanel());
         frame.add(this.heroInfoUI.getPanel());
         frame.add(this.shopUI.getPanel());
@@ -70,7 +69,7 @@ public class HeroUI {
     }
 
 
-    public void clear(){
+    public void clear() {
         frame.remove(this.monsterInfoUI.getPanel());
         frame.remove(this.heroInfoUI.getPanel());
         frame.remove(this.infoBoard.getInfoPanel());

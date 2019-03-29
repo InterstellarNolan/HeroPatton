@@ -26,15 +26,17 @@ public class Battle {
     }
 
     public ResultMessage attack() {
-        boolean killed = monster.beAttacked((int) character.normalAttack().getT());
+        ResultMessage attackMessage=character.normalAttack();
+        boolean killed = monster.beAttacked((int) attackMessage.getT());
         if (killed) {
-            return this.getReward();
+            return this.getReward(attackMessage.getInformation());
         }
-        killed = character.beAttacked(monster.attack());
+        int monsterDamage=monster.attack();
+        killed = character.beAttacked(monsterDamage);
         if (killed) {
-            return this.beKilled();
+            return this.beKilled("怪物对英雄造成"+String.valueOf(monsterDamage)+"点伤害，英雄死亡；");
         }
-        return new ResultMessage(true, "下一回合", 0);
+        return new ResultMessage(true, attackMessage.getInformation(), 0);
     }
 
     /**
@@ -49,19 +51,20 @@ public class Battle {
         if (roleSkillResult.isSuccess()) {
             boolean monsterKilled = this.monster.beAttacked((Integer) roleSkillResult.getT());
             if (monsterKilled) {
-                return this.getReward();
+                return this.getReward(roleSkillResult.getInformation().concat("怪物受到" + Integer.valueOf((Integer) roleSkillResult.getT())+"点伤害；"));
             } else {
-                info=roleSkillResult.getInformation().concat("；怪物受到" + Integer.valueOf((Integer) roleSkillResult.getT()));
+                info=roleSkillResult.getInformation().concat("怪物受到" + Integer.valueOf((Integer) roleSkillResult.getT())+"点伤害；");
             }
         } else {
             info= roleSkillResult.getInformation();
         }
-        boolean killed = character.beAttacked(monster.attack());
+        int monsterDamage=monster.attack();
+        boolean killed = character.beAttacked(monsterDamage);
         if (killed) {
-            return this.beKilled();
+            return this.beKilled("怪物对英雄造成"+String.valueOf(monsterDamage)+"点伤害，英雄死亡；");
         }
 
-        return  new ResultMessage(true, "下一回合；".concat(info), 0);
+        return  new ResultMessage(true, (info), 0);
     }
 
     public ResultMessage oldskill(ArrayList<Skill> skills) {
@@ -80,7 +83,7 @@ public class Battle {
                 boolean killed = this.monster.beAttacked(result.getDamage());
                 if (killed) {
 
-                    this.getReward();
+                    this.getReward("无");
 
                 }
             }
@@ -91,26 +94,26 @@ public class Battle {
 
         boolean beKilled = character.beAttacked(monster.attack());
         if (beKilled) {
-            this.beKilled();
+            this.beKilled("无");
         }
 
         return new ResultMessage(true, "下一回合", 0);
     }
 
-    private ResultMessage getReward() {
+    private ResultMessage getReward(String info) {
         this.end = true;
         this.win = true;
         int coin = this.character.getCoin() + this.monster.getCoin();
         this.character.setCoin(coin);
         this.character.levelUp();
-        return new ResultMessage(true, "战斗胜利", 0);
+        return new ResultMessage(true, info.concat("\n战斗胜利！"), 0);
     }
 
 
-    private ResultMessage beKilled() {
+    private ResultMessage beKilled(String info) {
         this.end = true;
         this.win = false;
-        return new ResultMessage(false, "战斗失败", 0);
+        return new ResultMessage(false, info.concat("\n战斗失败，重新开始！"), 0);
     }
 
     public Monster getMonster() {

@@ -54,7 +54,7 @@ public class RoleHunter implements Role {
         if (currentLevel < 100) {
             this.character.setLevel(currentLevel + 1);
         } else {
-            return new ResultMessage(false, "角色升级失败，已达到100级", currentLevel);
+            return new ResultMessage(false, "角色升级失败，已达到100级；", currentLevel);
         }
 
 
@@ -66,7 +66,7 @@ public class RoleHunter implements Role {
             Weapon weapon = this.character.getWeapon();
             ResultMessage resultMessage = weapon.levelUp();
             if (!resultMessage.isSuccess()) {
-                return new ResultMessage(true, "猎人角色升级成功，武器升级失败", currentLevel + 1);
+                return new ResultMessage(true, "猎人角色升级成功，武器升级失败；", currentLevel + 1);
             }
         }
         /**
@@ -90,7 +90,7 @@ public class RoleHunter implements Role {
         this.character.setMaxMagicPoint(magicPoint);
         this.character.setMagicPoint(magicPoint);
 
-        message = "猎人角色升级成功";
+        message = "猎人角色升级成功；";
         return new ResultMessage(true, message, currentLevel + 1);
     }
 
@@ -120,7 +120,10 @@ public class RoleHunter implements Role {
             } else {
                 damage = 0;
             }
-            return new ResultMessage(hit, "造成".concat(String.valueOf(damage) + "点" + weapon.getDamageType() + "伤害"), damage);
+            if(!hit){
+                return new ResultMessage(hit, "未命中；", damage);
+            }
+            return new ResultMessage(hit, "造成".concat(String.valueOf(damage) + "点" + weapon.getDamageType() + "；"), damage);
             //没有武器 造成80%命中的石块伤害
         } else {
             //5乘角色等级，加2-6点伤害
@@ -131,7 +134,7 @@ public class RoleHunter implements Role {
             } else {
                 damage = 0;
             }
-            return new ResultMessage(hit, "造成".concat(String.valueOf(damage) + "点石块伤害"), damage);
+            return new ResultMessage(hit, "造成".concat(String.valueOf(damage) + "点石块伤害；"), damage);
         }
     }
 
@@ -172,9 +175,9 @@ public class RoleHunter implements Role {
             int cost = skill.getCost();
             if (cost > this.character.getMagicPoint()) {
                 if (usedSkills.size() == 0) {
-                    return new ResultMessage(false, "猎人MP不够，无法施展任何技能", damage);
+                    return new ResultMessage(false, "猎人MP不够，无法施展任何技能；", damage);
                 }
-                return new ResultMessage(true, "猎人MP不够，仅使用了部分技能", damage);
+                return new ResultMessage(true, "猎人MP不够，仅使用了部分技能；", damage);
             } else {
                 usedSkills.add(skills.get(i));
                 SkillResult skillResult = skill.execute(this.character.getWeapon().getDamage());

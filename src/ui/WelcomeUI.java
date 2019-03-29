@@ -1,7 +1,6 @@
 package ui;
 
 import controller.InitializeController;
-import controller.OperationController;
 
 import javax.swing.*;
 import javax.swing.border.Border;

@@ -55,7 +55,7 @@ public class RoleWarrior implements Role {
         if (currentLevel < 100) {
             this.character.setLevel(currentLevel + 1);
         } else {
-            return new ResultMessage(false, "角色升级失败，已达到100级", currentLevel);
+            return new ResultMessage(false, "角色升级失败，已达到100级；", currentLevel);
         }
 
 
@@ -67,7 +67,7 @@ public class RoleWarrior implements Role {
             Weapon weapon = this.character.getWeapon();
             ResultMessage resultMessage = weapon.levelUp();
             if (!resultMessage.isSuccess()) {
-                return new ResultMessage(true, "战士角色升级成功，武器升级失败", currentLevel + 1);
+                return new ResultMessage(true, "战士角色升级成功，武器升级失败；", currentLevel + 1);
             }
         }
         /**
@@ -91,7 +91,7 @@ public class RoleWarrior implements Role {
         this.character.setMaxMagicPoint(magicPoint);
         this.character.setMagicPoint(magicPoint);
 
-        message = "战士角色升级成功";
+        message = "战士角色升级成功；";
         return new ResultMessage(true, message, currentLevel + 1);
 
 
@@ -123,12 +123,15 @@ public class RoleWarrior implements Role {
             } else {
                 damage = 0;
             }
-            return new ResultMessage(hit, "造成".concat(String.valueOf(damage) + "点" + weapon.getDamageType() + "伤害"), damage);
+            if(!hit){
+                return new ResultMessage(hit, "未命中；", damage);
+            }
+            return new ResultMessage(hit, "造成".concat(String.valueOf(damage) + "点" + weapon.getDamageType() + "；"), damage);
             //没有武器 造成必定命中的徒手伤害
         } else {
             //7乘角色等级，加3-8点伤害
             int damage = character.getLevel() * 7 + new Random().nextInt(6) + 3;
-            return new ResultMessage(true, "造成".concat(String.valueOf(damage) + "点徒手伤害"), damage);
+            return new ResultMessage(true, "造成".concat(String.valueOf(damage) + "点徒手伤害；"), damage);
         }
     }
 
@@ -167,9 +170,9 @@ public class RoleWarrior implements Role {
             int cost = skill.getCost();
             if (cost > this.character.getMagicPoint()) {
                 if (usedSkills.size() == 0) {
-                    return new ResultMessage(false, "战士MP不够，无法施展任何技能", damage);
+                    return new ResultMessage(false, "战士MP不够，无法施展任何技能；", damage);
                 }
-                return new ResultMessage(true, "战士MP不够，仅使用了部分技能", damage);
+                return new ResultMessage(true, "战士MP不够，仅使用了部分技能；", damage);
             } else {
                 usedSkills.add(skills.get(i));
                 SkillResult skillResult = skill.execute(this.character.getWeapon().getDamage());
