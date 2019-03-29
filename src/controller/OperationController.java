@@ -15,14 +15,16 @@ public class OperationController {
     private MonsterInfoUI monsterInfoUI;
     private Character character;
     private HeroUI heroUI;
+    private ShopUI shopUI;
 
-    public  OperationController(Character character,Battle battle,HeroInfoUI heroInfoUI,MonsterInfoUI monsterInfoUI,OperationPanel operationPanel,HeroUI heroUI){
+    public  OperationController(Character character,Battle battle,HeroInfoUI heroInfoUI,MonsterInfoUI monsterInfoUI,OperationPanel operationPanel,HeroUI heroUI,ShopUI shopUI){
         this.character=character;
         this.heroInfoUI=heroInfoUI;
         this.monsterInfoUI=monsterInfoUI;
         this.battle=battle;
         this.operationPanel=operationPanel;
         this.heroUI=heroUI;
+        this.shopUI=shopUI;
         activeController();
 
     }
@@ -73,10 +75,11 @@ public class OperationController {
         this.monsterInfoUI.refresh();
         this.heroInfoUI.refresh();
         this.operationPanel.changeToBattle();
+        shopUI.disableButtons();
     }
 
     public void goToShop(){
-
+        shopUI.enableButtons();
     }
 
     public void endGame(){
